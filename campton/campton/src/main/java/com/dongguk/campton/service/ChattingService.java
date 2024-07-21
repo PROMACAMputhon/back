@@ -3,6 +3,7 @@ package com.dongguk.campton.service;
 import com.dongguk.campton.domain.Chatting;
 import com.dongguk.campton.domain.Member;
 import com.dongguk.campton.domain.Room;
+import com.dongguk.campton.dto.request.MemberLoginIdRequestDto;
 import com.dongguk.campton.dto.request.SaveChatRequestDto;
 import com.dongguk.campton.dto.response.ChatListResponseDto;
 import com.dongguk.campton.exception.ApiException;
@@ -59,11 +60,20 @@ public class ChattingService {
     }
 
 
-    public Map<String, Object> getChatList(Long roomId){
+    public Map<String, Object> getChatList(Long roomId, MemberLoginIdRequestDto memberLoginIdRequestDto){
+
+        Member member = memberRepository.findByLoginId(memberLoginIdRequestDto.getMemberLoginId())
+                .orElseThrow(() -> new ApiException(ErrorDefine.NOT_EXIST_MEMBER));
 
         if(!roomRepository.existsRoomById(roomId)) {
             throw new ApiException(ErrorDefine.NOT_EXIST_ROOM);
         }
+
+        if(!member.getId().equals(roomId)){
+            throw new ApiException(ErrorDefine.NOT_ALLOW_ROOM);
+        }
+
+
 
         List<Chatting> chattings = chattingRepository.findAllByRoomIdOrderByCreateAtAsc(roomId);
 
