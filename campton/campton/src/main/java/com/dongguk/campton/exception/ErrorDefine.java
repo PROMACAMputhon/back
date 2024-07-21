@@ -13,6 +13,7 @@ public enum ErrorDefine {
     ALREADY_EXIST_MEMBER("4001", HttpStatus.BAD_REQUEST, "존재하는 아이디 입니다"),
     NOT_EXIST_MEMBER("4002", HttpStatus.BAD_REQUEST, "존재하지 않는 아이디 입니다"),
     WRONG_PASSWORD("4003", HttpStatus.BAD_REQUEST, "비밀번호가 틀렸습니다"),
+    NOT_EXIST_ROOM("4004", HttpStatus.BAD_REQUEST, "존재하지 않는 방입니다"),
 
     // INTERNAL_SERER_ERROR: 500
     SERVER_ERROR("5000", HttpStatus.INTERNAL_SERVER_ERROR, "서버 오류가 있습니다.");

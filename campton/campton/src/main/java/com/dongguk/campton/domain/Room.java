@@ -1,6 +1,5 @@
 package com.dongguk.campton.domain;
 
-import com.dongguk.campton.domain.enums.RoomType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,8 +21,7 @@ public class Room {
     private Long id;
 
     @Column(name = "room_type", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private RoomType roomType;
+    private Integer roomType;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id", nullable = false)

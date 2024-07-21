@@ -5,13 +5,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Builder
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class RoomResponseDto {
-
-    private Long room_id;
-    private Integer room_type;
-
+public class SaveChatResponseDto {
+    private Long roomId;
 }
