@@ -1,10 +1,14 @@
 package com.dongguk.campton.controller;
 
 import com.dongguk.campton.dto.request.SaveChatRequestDto;
+import com.dongguk.campton.dto.response.ChatListResponseDto;
 import com.dongguk.campton.dto.response.ResponseDto;
+import com.dongguk.campton.dto.response.RoomResponseDto;
 import com.dongguk.campton.service.ChattingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,4 +23,10 @@ public class ChattingController {
             ) {
         return new ResponseDto<>(chattingService.saveChat(roomId, saveChatRequestDto));
     }
+
+    @GetMapping("/list/{roomId}")
+    public ResponseDto<List<ChatListResponseDto>> getChatList(@PathVariable Long roomId){
+        return new ResponseDto<>(chattingService.getChatList(roomId));
+    }
+
 }
