@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SigninResponseDto {
     private Long id;
-    private String name;
+//    private String name;
 
 }

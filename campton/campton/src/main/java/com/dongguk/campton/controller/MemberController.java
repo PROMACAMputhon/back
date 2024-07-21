@@ -24,9 +24,9 @@ public class MemberController {
 
     @PostMapping("/signin")
     public ResponseDto<SigninResponseDto> signIn(
-            @RequestBody SigninRequestDto signinRequestDto
+            @RequestBody SignupRequestDto signupRequestDto
             ) {
-        return new ResponseDto<>(memberService.signIn(signinRequestDto));
+        return new ResponseDto<>(memberService.newSignIn(signupRequestDto));
     }
 
     @PostMapping("/signout")
