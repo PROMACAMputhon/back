@@ -1,15 +1,13 @@
 package com.dongguk.campton.controller;
 
+import com.dongguk.campton.dto.request.MemberIdRequestDto;
 import com.dongguk.campton.dto.request.SigninRequestDto;
 import com.dongguk.campton.dto.request.SignupRequestDto;
 import com.dongguk.campton.dto.response.ResponseDto;
 import com.dongguk.campton.dto.response.SigninResponseDto;
 import com.dongguk.campton.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,4 +28,11 @@ public class MemberController {
             ) {
         return new ResponseDto<>(memberService.signIn(signinRequestDto));
     }
+
+//    @PostMapping("/signout")
+//    public ResponseDto<Boolean> signout(
+//            @RequestBody MemberIdRequestDto memberIdRequestDto
+//            ) {
+//
+//    }
 }
