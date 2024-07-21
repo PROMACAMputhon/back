@@ -1,6 +1,7 @@
 package com.dongguk.campton.service;
 
 import com.dongguk.campton.domain.Member;
+import com.dongguk.campton.dto.request.MemberIdRequestDto;
 import com.dongguk.campton.dto.request.SigninRequestDto;
 import com.dongguk.campton.dto.request.SignupRequestDto;
 import com.dongguk.campton.dto.response.SigninResponseDto;
@@ -46,5 +47,13 @@ public class MemberService {
                 .id(member.getId())
                 .name(member.getName())
                 .build();
+    }
+
+    public Boolean signOut(MemberIdRequestDto memberIdRequestDto) {
+        Member member = memberRepository.findById(memberIdRequestDto.getMemberId())
+                .orElseThrow(() -> new ApiException(ErrorDefine.NOT_EXIST_MEMBER));
+
+        member.logout();
+        return true;
     }
 }
