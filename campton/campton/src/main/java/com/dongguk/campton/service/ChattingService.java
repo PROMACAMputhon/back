@@ -14,7 +14,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -57,7 +59,7 @@ public class ChattingService {
     }
 
 
-    public List<ChatListResponseDto> getChatList(Long roomId){
+    public Map<String, Object> getChatList(Long roomId){
 
         if(!roomRepository.existsRoomById(roomId)) {
             throw new ApiException(ErrorDefine.NOT_EXIST_ROOM);
@@ -65,7 +67,8 @@ public class ChattingService {
 
         List<Chatting> chattings = chattingRepository.findAllByRoomIdOrderByCreateAtAsc(roomId);
 
-        return chattings.stream()
+
+        List<ChatListResponseDto> chatListResponseDtos = chattings.stream()
                 .map(chatting -> ChatListResponseDto.builder()
                         .chat_id(chatting.getId())
                         .answer(chatting.getAnswer())
@@ -73,7 +76,12 @@ public class ChattingService {
                         .room_id(roomId)
                         .createAt(chatting.getCreateAt())
                         .build())
-                        .collect(Collectors.toList());
+                .collect(Collectors.toList());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("selectChat", chatListResponseDtos);
+
+        return response;
 
     }
 }

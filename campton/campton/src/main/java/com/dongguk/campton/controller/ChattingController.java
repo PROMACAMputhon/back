@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,7 +26,7 @@ public class ChattingController {
     }
 
     @GetMapping("/list/{roomId}")
-    public ResponseDto<List<ChatListResponseDto>> getChatList(@PathVariable Long roomId){
+    public ResponseDto<Map<String, Object>> getChatList(@PathVariable Long roomId){
         return new ResponseDto<>(chattingService.getChatList(roomId));
     }
 
