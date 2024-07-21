@@ -16,7 +16,7 @@ public enum ErrorDefine {
     NOT_EXIST_ROOM("4004", HttpStatus.BAD_REQUEST, "존재하지 않는 방입니다"),
 
     // Forbidden
-    NOT_ALLOW_ROOM("4004", HttpStatus.FORBIDDEN, "조회 권한이 없습니다."),
+    NOT_ALLOW_ROOM("4005", HttpStatus.FORBIDDEN, "조회 권한이 없습니다."),
 
 
     // INTERNAL_SERER_ERROR: 500
