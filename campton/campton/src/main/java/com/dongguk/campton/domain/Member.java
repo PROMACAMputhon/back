@@ -19,8 +19,8 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "member_name", nullable = false)
-    private String name;
+//    @Column(name = "member_name", nullable = false)
+//    private String name;
 
     //member_login_id
     @Column(name = "member_login_id", nullable = false)
@@ -39,8 +39,8 @@ public class Member {
 
 
     @Builder
-    public Member(String name, String loginId, String password){
-        this.name = name;
+    public Member(String loginId, String password){
+//        this.name = name;
         this.loginId = loginId;
         this.password = password;
         this.isLogin = false;

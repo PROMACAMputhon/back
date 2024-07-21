@@ -18,6 +18,36 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
     private final MemberRepository memberRepository;
 
+    public SigninResponseDto newSignIn(SignupRequestDto signupRequestDto){
+        // 이미 회원 가입이 된 회원
+        if(memberRepository.existsMemberByLoginId(signupRequestDto.getMemberLoginId())) {
+            Member member = memberRepository.findByLoginId(signupRequestDto.getMemberLoginId())
+                    .orElseThrow(() -> new ApiException(ErrorDefine.NOT_EXIST_MEMBER));
+
+            member.login();
+            return SigninResponseDto.builder()
+                    .id(member.getId())
+//                    .name(member.getName())
+                    .build();
+        }else{ // 회원 가입이 안되어있어 새로 가입을 하고, 로그인까지 되는
+            Member member = Member.builder()
+//                    .name(signupRequestDto.getMemberName())
+                    .loginId(signupRequestDto.getMemberLoginId())
+                    .password(signupRequestDto.getMemberPassword())
+                    .build();
+
+            memberRepository.save(member);
+            member.login();
+            return SigninResponseDto.builder()
+                    .id(member.getId())
+//                    .name(member.getName())
+                    .build();
+        }
+
+
+
+    }
+
     public Boolean signUp(SignupRequestDto signupRequestDto) {
 
         if(memberRepository.existsMemberByLoginId(signupRequestDto.getMemberLoginId())) {
@@ -25,7 +55,7 @@ public class MemberService {
         }
 
         Member member = Member.builder()
-                .name(signupRequestDto.getMemberName())
+//                .name(signupRequestDto.getMemberName())
                 .loginId(signupRequestDto.getMemberLoginId())
                 .password(signupRequestDto.getMemberPassword())
                 .build();
@@ -45,7 +75,7 @@ public class MemberService {
 
         return SigninResponseDto.builder()
                 .id(member.getId())
-                .name(member.getName())
+//                .name(member.getName())
                 .build();
     }
 
