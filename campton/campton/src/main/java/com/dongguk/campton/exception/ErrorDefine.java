@@ -15,6 +15,10 @@ public enum ErrorDefine {
     WRONG_PASSWORD("4003", HttpStatus.BAD_REQUEST, "비밀번호가 틀렸습니다"),
     NOT_EXIST_ROOM("4004", HttpStatus.BAD_REQUEST, "존재하지 않는 방입니다"),
 
+    // Forbidden
+    NOT_ALLOW_ROOM("4004", HttpStatus.FORBIDDEN, "조회 권한이 없습니다."),
+
+
     // INTERNAL_SERER_ERROR: 500
     SERVER_ERROR("5000", HttpStatus.INTERNAL_SERVER_ERROR, "서버 오류가 있습니다.");
     private final String errorCode;

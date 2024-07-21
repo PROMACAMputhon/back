@@ -1,5 +1,6 @@
 package com.dongguk.campton.controller;
 
+import com.dongguk.campton.dto.request.MemberLoginIdRequestDto;
 import com.dongguk.campton.dto.request.SaveChatRequestDto;
 import com.dongguk.campton.dto.response.ChatListResponseDto;
 import com.dongguk.campton.dto.response.ResponseDto;
@@ -26,8 +27,11 @@ public class ChattingController {
     }
 
     @GetMapping("/list/{roomId}")
-    public ResponseDto<Map<String, Object>> getChatList(@PathVariable Long roomId){
-        return new ResponseDto<>(chattingService.getChatList(roomId));
+    public ResponseDto<Map<String, Object>> getChatList(
+            @PathVariable Long roomId,
+            @RequestBody MemberLoginIdRequestDto memberLoginIdRequestDto
+    ){
+        return new ResponseDto<>(chattingService.getChatList(roomId, memberLoginIdRequestDto));
     }
 
 }
