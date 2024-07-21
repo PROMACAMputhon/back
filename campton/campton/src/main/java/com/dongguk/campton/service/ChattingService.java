@@ -54,11 +54,13 @@ public class ChattingService {
         Member member = memberRepository.findById(memberIdRequestDto.getMemberId())
                 .orElseThrow(() -> new ApiException(ErrorDefine.NOT_EXIST_MEMBER));
 
+        Room room = roomRepository.findById(roomId)
+                .orElseThrow(() -> new ApiException(ErrorDefine.NOT_EXIST_ROOM));
         if(!roomRepository.existsRoomById(roomId)) {
             throw new ApiException(ErrorDefine.NOT_EXIST_ROOM);
         }
 
-        if(!member.getId().equals(roomId)){
+        if(!member.getId().equals(room.getMember().getId())){
             throw new ApiException(ErrorDefine.NOT_ALLOW_ROOM);
         }
 
