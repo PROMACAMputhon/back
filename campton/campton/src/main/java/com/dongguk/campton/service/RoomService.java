@@ -11,7 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,19 +23,25 @@ public class RoomService {
     private final RoomRepository roomRepository;
     private final MemberRepository memberRepository;
 
-    public List<RoomResponseDto> getList(MemberIdRequestDto memberIdRequestDto) {
+    public Map<String, Object> getList(MemberIdRequestDto memberIdRequestDto) {
 
-        if(memberRepository.existsMemberById(memberIdRequestDto.getMemberId())) {
+        if(!memberRepository.existsMemberById(memberIdRequestDto.getMemberId())) {
             throw new ApiException(ErrorDefine.NOT_EXIST_MEMBER);
         }
 
         List<Room> rooms = roomRepository.findAllByMemberId(memberIdRequestDto.getMemberId());
 
-        return rooms.stream()
+        List<RoomResponseDto> roomResponseDtos = rooms.stream()
                 .map(room -> RoomResponseDto.builder()
                         .room_id(room.getId())
                         .room_type(room.getRoomType())
                         .build())
                 .collect(Collectors.toList());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("selectChatting", roomResponseDtos);
+
+        return response;
+
     }
 }

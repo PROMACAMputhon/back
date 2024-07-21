@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,9 +20,8 @@ import java.util.List;
 public class RoomController {
     private final RoomService roomService;
 
-
     @GetMapping("/list")
-    public ResponseDto<List<RoomResponseDto>> getChattingList(
+    public ResponseDto<Map<String, Object>> getChattingList(
             @Valid @RequestBody MemberIdRequestDto memberIdRequestDto){
         return new ResponseDto<>(roomService.getList(memberIdRequestDto));
 
