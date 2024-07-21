@@ -24,6 +24,10 @@ public class MemberService {
             Member member = memberRepository.findByLoginId(signupRequestDto.getMemberLoginId())
                     .orElseThrow(() -> new ApiException(ErrorDefine.NOT_EXIST_MEMBER));
 
+            if(!member.getPassword().equals(signupRequestDto.getMemberPassword())) {
+                throw new ApiException(ErrorDefine.WRONG_PASSWORD);
+            }
+
             member.login();
             return SigninResponseDto.builder()
                     .id(member.getId())
@@ -64,20 +68,20 @@ public class MemberService {
         return true;
     }
 
-    public SigninResponseDto signIn(SigninRequestDto signinRequestDto) {
-        Member member = memberRepository.findByLoginId(signinRequestDto.getMemberLoginId())
-                .orElseThrow(() -> new ApiException(ErrorDefine.NOT_EXIST_MEMBER));
-
-        if(!member.getPassword().equals(signinRequestDto.getMemberPassword())) {
-            throw new ApiException(ErrorDefine.WRONG_PASSWORD);
-        }
-        member.login();
-
-        return SigninResponseDto.builder()
-                .id(member.getId())
-//                .name(member.getName())
-                .build();
-    }
+//    public SigninResponseDto signIn(SigninRequestDto signinRequestDto) {
+////        Member member = memberRepository.findByLoginId(signinRequestDto.getMemberLoginId())
+////                .orElseThrow(() -> new ApiException(ErrorDefine.NOT_EXIST_MEMBER));
+//
+//        if(!member.getPassword().equals(signinRequestDto.getMemberPassword())) {
+//            throw new ApiException(ErrorDefine.WRONG_PASSWORD);
+//        }
+//        member.login();
+//
+//        return SigninResponseDto.builder()
+//                .id(member.getId())
+////                .name(member.getName())
+//                .build();
+//    }
 
     public Boolean signOut(MemberIdRequestDto memberIdRequestDto) {
         Member member = memberRepository.findById(memberIdRequestDto.getMemberId())

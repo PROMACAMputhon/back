@@ -16,7 +16,5 @@ public class SaveChatRequestDto {
     private Long memberId;
     private Integer roomType;
     private String roomTitle;
-    private String answer;
-    private String question;
 
 }

@@ -5,6 +5,7 @@ import com.dongguk.campton.dto.request.SaveChatRequestDto;
 import com.dongguk.campton.dto.response.ChatListResponseDto;
 import com.dongguk.campton.dto.response.ResponseDto;
 import com.dongguk.campton.dto.response.RoomResponseDto;
+import com.dongguk.campton.dto.response.SaveChatResponseDto;
 import com.dongguk.campton.service.ChattingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +19,11 @@ import java.util.Map;
 public class ChattingController {
     private final ChattingService chattingService;
 
-    @PostMapping("/save/{roomId}")
-    public ResponseDto<Boolean> saveChat(
-            @PathVariable Long roomId,
+    @PostMapping("/save")
+    public ResponseDto<SaveChatResponseDto> saveChat(
             @RequestBody SaveChatRequestDto saveChatRequestDto
             ) {
-        return new ResponseDto<>(chattingService.saveChat(roomId, saveChatRequestDto));
+        return new ResponseDto<>(chattingService.saveChat(saveChatRequestDto));
     }
 
     @GetMapping("/list/{roomId}")
