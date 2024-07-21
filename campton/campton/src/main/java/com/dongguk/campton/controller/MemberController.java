@@ -29,10 +29,10 @@ public class MemberController {
         return new ResponseDto<>(memberService.signIn(signinRequestDto));
     }
 
-//    @PostMapping("/signout")
-//    public ResponseDto<Boolean> signout(
-//            @RequestBody MemberIdRequestDto memberIdRequestDto
-//            ) {
-//
-//    }
+    @PostMapping("/signout")
+    public ResponseDto<Boolean> signout(
+            @RequestBody MemberIdRequestDto memberIdRequestDto
+            ) {
+        return new ResponseDto<>(memberService.signOut(memberIdRequestDto));
+    }
 }

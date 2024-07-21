@@ -49,4 +49,7 @@ public class Member {
     public void login(){
         this.isLogin = true;
     }
+    public void logout(){
+        this.isLogin = false;
+    }
 }
