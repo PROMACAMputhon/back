@@ -28,6 +28,8 @@ public class ChattingController {
             @PathVariable Long roomId,
             @RequestBody MemberIdRequestDto memberIdRequestDto
     ){
+
+        System.err.println("memberIdRequestDto = " + memberIdRequestDto.getMemberId());
         return new ResponseDto<>(chattingService.getChatList(roomId, memberIdRequestDto));
     }
 

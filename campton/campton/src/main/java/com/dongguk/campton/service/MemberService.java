@@ -23,7 +23,7 @@ public class MemberService {
         if(memberRepository.existsMemberByLoginId(signupRequestDto.getMemberLoginId())) {
             Member member = memberRepository.findByLoginId(signupRequestDto.getMemberLoginId())
                     .orElseThrow(() -> new ApiException(ErrorDefine.NOT_EXIST_MEMBER));
-
+            System.err.println("로그인 존재하는데 " + member.getPassword());
             if(!member.getPassword().equals(signupRequestDto.getMemberPassword())) {
                 throw new ApiException(ErrorDefine.WRONG_PASSWORD);
             }

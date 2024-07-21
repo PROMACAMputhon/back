@@ -18,21 +18,22 @@ public class MemberController {
     @PostMapping("/signup")
     public ResponseDto<Boolean> signUp(
             @RequestBody SignupRequestDto signupRequestDto
-            ) {
+    ) {
         return new ResponseDto<>(memberService.signUp(signupRequestDto));
     }
 
     @PostMapping("/signin")
     public ResponseDto<SigninResponseDto> signIn(
             @RequestBody SignupRequestDto signupRequestDto
-            ) {
+    ) {
         return new ResponseDto<>(memberService.newSignIn(signupRequestDto));
     }
 
     @PostMapping("/signout")
     public ResponseDto<Boolean> signout(
             @RequestBody MemberIdRequestDto memberIdRequestDto
-            ) {
+    ) {
         return new ResponseDto<>(memberService.signOut(memberIdRequestDto));
     }
 }
+

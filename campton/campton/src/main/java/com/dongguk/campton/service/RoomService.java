@@ -30,6 +30,7 @@ public class RoomService {
         }
 
         List<Room> rooms = roomRepository.findAllByMemberId(memberIdRequestDto.getMemberId());
+        System.err.println("이부분 잘 들어오나?1 " + rooms);
 
         List<RoomResponseDto> roomResponseDtos = rooms.stream()
                 .map(room -> RoomResponseDto.builder()
@@ -38,9 +39,12 @@ public class RoomService {
                         .build())
                 .collect(Collectors.toList());
 
+        System.err.println("이부분 잘 들어오나? " + roomResponseDtos);
+
+
         Map<String, Object> response = new HashMap<>();
         response.put("selectChatting", roomResponseDtos);
-
+        System.err.println("이부분 잘 들어오나?3 " + response);
         return response;
 
     }

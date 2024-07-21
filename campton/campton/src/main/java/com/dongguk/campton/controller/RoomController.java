@@ -16,13 +16,14 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-//@RequestMapping("/room")
+@RequestMapping("/chatting")
 public class RoomController {
     private final RoomService roomService;
 
-    @GetMapping("/chatting/list")
+    @GetMapping("/room/list")
     public ResponseDto<Map<String, Object>> getChattingList(
-            @Valid @RequestBody MemberIdRequestDto memberIdRequestDto){
+            @RequestBody MemberIdRequestDto memberIdRequestDto){
+        System.err.println("memberIdRequestDto = " + memberIdRequestDto.getMemberId());
         return new ResponseDto<>(roomService.getList(memberIdRequestDto));
 
     }
