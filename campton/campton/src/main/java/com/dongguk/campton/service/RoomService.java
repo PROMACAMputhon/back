@@ -35,6 +35,7 @@ public class RoomService {
         List<RoomResponseDto> roomResponseDtos = rooms.stream()
                 .map(room -> RoomResponseDto.builder()
                         .room_id(room.getId())
+                        .room_title(room.getRoomTitle())
                         .room_type(room.getRoomType())
                         .build())
                 .collect(Collectors.toList());

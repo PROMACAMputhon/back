@@ -33,9 +33,11 @@ public class ChattingService {
     public SaveChatResponseDto saveChat(SaveChatRequestDto saveChatRequestDto) {
         Member member = memberRepository.findById(saveChatRequestDto.getMemberId())
                 .orElseThrow(() -> new ApiException(ErrorDefine.NOT_EXIST_MEMBER));
+        Integer count = roomRepository.countByIdAndRoomTitleLike(member.getId(), saveChatRequestDto.getRoomTitle());
+        // roomTitle을 빌드 할때 saveChatRequestDto.getRoomTitle()에 count값을 String으로 붙이고 싶음
 
         Room newRoom = Room.builder()
-                .roomTitle(saveChatRequestDto.getRoomTitle())
+                .roomTitle(saveChatRequestDto.getRoomTitle()+count.toString()+1)
                 .roomType(saveChatRequestDto.getRoomType())
                 .member(member)
                 .build();

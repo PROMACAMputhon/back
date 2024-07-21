@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class RoomResponseDto {
     private Long room_id;
     private Integer room_type;
+    private String room_title;
 
 }
