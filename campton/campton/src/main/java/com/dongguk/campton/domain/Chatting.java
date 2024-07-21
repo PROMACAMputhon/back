@@ -1,6 +1,7 @@
 package com.dongguk.campton.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
@@ -33,4 +34,12 @@ public class Chatting {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "room_id", nullable = false)
     private Room room;
+
+    @Builder
+    public Chatting(String question, String answer, Room room) {
+        this.question = question;
+        this.answer = answer;
+        this.createAt = LocalDate.now();
+        this.room = room;
+    }
 }
