@@ -1,6 +1,7 @@
 package com.dongguk.campton.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
@@ -20,6 +21,9 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "room_title", nullable = true)
+    private String roomTitle;
+
     @Column(name = "room_type", nullable = false)
     private Integer roomType;
 
@@ -30,5 +34,12 @@ public class Room {
     @OneToMany(mappedBy = "room", cascade = CascadeType.MERGE)
     private List<Chatting> chattings = new ArrayList<>();
 
+
+    @Builder
+    public Room(String roomTitle, Integer roomType, Member member) {
+        this.roomTitle = roomTitle;
+        this.roomType = roomType;
+        this.member = member;
+    }
 
 }
