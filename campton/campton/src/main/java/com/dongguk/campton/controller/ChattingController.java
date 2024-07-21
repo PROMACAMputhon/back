@@ -23,7 +23,7 @@ public class ChattingController {
         return new ResponseDto<>(chattingService.saveChat(saveChatRequestDto));
     }
 
-    @GetMapping("/list/{roomId}")
+    @PostMapping("/list/{roomId}")
     public ResponseDto<Map<String, Object>> getChatList(
             @PathVariable Long roomId,
             @RequestBody MemberIdRequestDto memberIdRequestDto

@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@NoArgsConstructor
 public class MemberIdRequestDto {
     private Long memberId;
 }

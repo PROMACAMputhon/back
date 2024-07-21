@@ -33,6 +33,8 @@ public class MemberController {
     public ResponseDto<Boolean> signout(
             @RequestBody MemberIdRequestDto memberIdRequestDto
     ) {
+
+        System.err.println("memberIdRequestDto = " + memberIdRequestDto.getMemberId());
         return new ResponseDto<>(memberService.signOut(memberIdRequestDto));
     }
 }
