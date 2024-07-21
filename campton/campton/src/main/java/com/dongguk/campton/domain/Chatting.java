@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 import static jakarta.persistence.FetchType.LAZY;
 
-@Table(name = "CAHTTING_TB")
+@Table(name = "CHATTING_TB")
 @Entity
 @Getter
 @NoArgsConstructor
