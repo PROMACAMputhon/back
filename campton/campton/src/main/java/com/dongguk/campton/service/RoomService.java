@@ -4,6 +4,8 @@ import com.dongguk.campton.domain.Room;
 import com.dongguk.campton.dto.request.MemberIdRequestDto;
 import com.dongguk.campton.dto.response.RoomResponseDto;
 import com.dongguk.campton.exception.ApiException;
+import com.dongguk.campton.exception.ErrorDefine;
+import com.dongguk.campton.respository.MemberRepository;
 import com.dongguk.campton.respository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,9 +19,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class RoomService {
     private final RoomRepository roomRepository;
-
+    private final MemberRepository memberRepository;
 
     public List<RoomResponseDto> getList(MemberIdRequestDto memberIdRequestDto) {
+
+        if(memberRepository.existsMemberById(memberIdRequestDto.getMemberId())) {
+            throw new ApiException(ErrorDefine.NOT_EXIST_MEMBER);
+        }
 
         List<Room> rooms = roomRepository.findAllByMemberId(memberIdRequestDto.getMemberId());
 
