@@ -24,7 +24,9 @@ public class Chatting {
     @Column(name = "question", nullable = false)
     private String question;
     //answer
+
     @Column(name = "answer", nullable = false)
+    @Lob
     private String answer;
 
     //createAt
